@@ -1,5 +1,13 @@
 # virusAlertRedux
 
+Installation is with:
+
+```
+sudo bash setup.sh
+```
+
+Parts are currently only partially functional.
+
 This code is a working branch with the intent to pass code back to virusAlert.  Much of this code borrows from and is in debt to:
 
 ```
