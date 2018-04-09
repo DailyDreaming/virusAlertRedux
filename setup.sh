@@ -15,7 +15,7 @@
 SCRIPT_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 DATA_DIR="$SCRIPT_DIR/../data"
 TOOLS_DIR="$SCRIPT_DIR/../tools"
-VF_DIR="$TOOLS_DIR/VirFinder"
+VF_PATH="$TOOLS_DIR/VirFinder/linux/VirFinder_1.1.tar.gz"
 export R_USER_LIBS="${TOOLS_DIR}/R"
 export PATH=$TOOLS_DIR:$PATH
 echo "TOOLS_DIR: $TOOLS_DIR"
@@ -163,10 +163,10 @@ make_endovir_cdd
 ## R Installation ##
 ####################
 
-echo "installing debian dependencies..."
+echo "Installing debian dependencies..."
 sudo apt-get install python3-biopython sra-toolkit r-base libxml2 libxml2-dev libcurl4-openssl-dev libssl-dev
 
-echo "installing R dependencies to ${TOOLS_DIR}/R..."
+echo "Installing R dependencies to ${TOOLS_DIR}/R..."
 mkdir -p "$R_USER_LIBS"
 echo """
 # see https://www.r-bloggers.com/permanently-setting-the-cran-repository/
@@ -194,9 +194,11 @@ if [[ ! -d VirFinder ]]; then
 fi
 popd
 
-echo "installing VirFinder R package..."
+echo "Installing VirFinder R package..."
 echo """
-install.packages('$VF_DIR', repos=NULL, type='source', lib='$R_USER_LIBS')
+install.packages('$VF_PATH', repos=NULL, type='source', lib='$R_USER_LIBS')
+library(VirFinder)
 """ | R --slave
 
 popd
+

@@ -1,14 +1,16 @@
 #!/usr/bin/env Rscript
-#usage: Rscript --vanilla /home/quokka/PycharmProjects/biotool/runVirFinder.R /home/quokka/PycharmProjects/data/SRR6172653.fastq 0.95
+#usage: Rscript --vanilla /home/quokka/PycharmProjects/biotool/runVirFinder.R /home/quokka/PycharmProjects/data/SRR6172653.fastq 0.95 /home/quokka/PycharmProjects/tools/R
+# /home/quokka/PycharmProjects/data/SRR6172653.fastq
+# predResult <- VF.pred('/home/quokka/PycharmProjects/data/SRR6172653.fastq')
 args = commandArgs(trailingOnly=TRUE)
 
 #args[1] should contain path points to the fasta file
 #args[2] is the significance cutoff
 
-# '/home/quokka/PycharmProjects/tools/R'
+# .libPaths('/home/quokka/PycharmProjects/tools/R')
 .libPaths(args[3])
 
-library("tidyverse")
+# library("tidyverse")
 library(VirFinder)
 
 # fasta.inputfile ="data/SRR5383888.fa"
@@ -32,3 +34,4 @@ ggplot(pred.result, aes(x=fname, y=score))+
   ylab("")
 
 ggsave("virfinder_hits.png")
+
